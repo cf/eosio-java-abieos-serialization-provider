@@ -19,25 +19,29 @@ public class EmbeddedLibraryTools {
 
     private EmbeddedLibraryTools() {
     }
+    private static URL getNativeLibraryURL(String lib){
+        String[] allowedExtensions = new String[]{"dylib", "so", "dll"};
+        String[] allowedPlatforms = new String[]{"", "macos/", "linux/", "windows/"};
+        StringBuilder url = new StringBuilder();
+        url.append("/eosiojavaabieos/build/lib/main/debug/");
+        URL nativeLibraryUrl = null;
+        for (String platform : allowedPlatforms) {
+            for (String ext : allowedExtensions) {
+                nativeLibraryUrl = AbiEosSerializationProviderImpl.class.getResource(url.toString() + platform +lib + "." + ext);
+                if (nativeLibraryUrl != null)
+                    return nativeLibraryUrl;
+            }
+        }
+        return null
+
+    }
 
     private static boolean loadEmbeddedLibrary() {
 
         boolean usingEmbedded = false;
-
-        // attempt to locate embedded native library within JAR at following location:
-        String[] allowedExtensions = new String[]{"dylib", "so", "dll"};
         String[] libs = new String[]{"libeosiojavaabieos"};
-        StringBuilder url = new StringBuilder();
-        url.append("/eosiojavaabieos/build/lib/main/debug/");
         for (String lib : libs) {
-            URL nativeLibraryUrl = null;
-            // loop through extensions, stopping after finding first one
-            for (String ext : allowedExtensions) {
-                nativeLibraryUrl = AbiEosSerializationProviderImpl.class.getResource(url.toString() + lib + "." + ext);
-                if (nativeLibraryUrl != null)
-                    break;
-            }
-
+            URL nativeLibraryUrl = getNativeLibraryURL();
             if (nativeLibraryUrl != null) {
                 // native library found within JAR, extract and load
                 try {
