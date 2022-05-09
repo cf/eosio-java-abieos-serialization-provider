@@ -5,6 +5,9 @@ plugins {
 }
 
 library {
+    targetMachines.add(machines.macOS.x86_64)
+    targetMachines.add(machines.linux.x86_64)
+    targetMachines.add(machines.windows.x86_64)
     binaries.configureEach { CppSharedLibrary binary ->
         def compileTask = binary.compileTask.get()
         def linkTask = binary.linkTask.get()
