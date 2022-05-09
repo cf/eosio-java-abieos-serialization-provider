@@ -1,0 +1,4 @@
+[submodule "abieos"]
+    path = abieos
+    url = https://github.com/invisible-train-40/abieos.git
+    branch = gmv1-jni
