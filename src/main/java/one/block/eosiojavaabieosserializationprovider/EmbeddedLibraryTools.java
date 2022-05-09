@@ -41,7 +41,7 @@ public class EmbeddedLibraryTools {
         boolean usingEmbedded = false;
         String[] libs = new String[]{"libeosiojavaabieos"};
         for (String lib : libs) {
-            URL nativeLibraryUrl = getNativeLibraryURL();
+            URL nativeLibraryUrl = getNativeLibraryURL(lib);
             if (nativeLibraryUrl != null) {
                 // native library found within JAR, extract and load
                 try {
