@@ -31,7 +31,7 @@ library {
         compileTask.includes.from("../abieos/external/rapidjson/include")
 
         def toolChain = binary.toolChain
-        def noLinux = "$System.env.NO_LINUX" == true;
+        def noLinux = "$System.env.NO_LINUX" == "true";
 
         if (toolChain instanceof VisualCpp) {
             compileTask.compilerArgs.addAll(["/TC"])
