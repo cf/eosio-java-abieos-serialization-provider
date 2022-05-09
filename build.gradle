@@ -51,7 +51,7 @@ jar {
 }
 
 task copyNativeLibrary(type: Copy) {
-    //dependsOn ':eosiojavaabieos:linkDebug'
+    dependsOn ':eosiojavaabieos:build'
     // Copy lib to /resources so tests can run within project (outside of gradle task)
     from ('eosiojavaabieos/build/lib/main/debug') {
         include '**/*.so'
