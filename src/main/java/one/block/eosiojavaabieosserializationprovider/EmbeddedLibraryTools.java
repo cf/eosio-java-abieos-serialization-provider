@@ -32,7 +32,7 @@ public class EmbeddedLibraryTools {
                     return nativeLibraryUrl;
             }
         }
-        return null
+        return null;
 
     }
 
